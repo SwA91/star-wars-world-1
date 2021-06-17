@@ -1,0 +1,17 @@
+[
+    {
+        "label": "People",
+        "icon": "pi pi-user",
+        "to": "/characterList"
+    },
+    {
+        "label": "Starships",
+        "icon": "pi pi-compass",
+        "to": "/starshipslist"
+    },
+    {
+        "label": "Planets",
+        "icon": "pi pi-globe",
+        "to": "/planetslist"
+    }
+]

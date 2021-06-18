@@ -14,5 +14,13 @@ class GeneralUtils {
   static isFieldWithValue(object) {
     return this.isWorkableObject(object) && object !== "";
   }
+  /**
+   * Comprueba si el objeto es distinto a NULL, UNDEFINED y su longitud mayor a 0
+   * @param {*} object a validar
+   * @returns
+   */
+  static isArrayWithValue(object) {
+    return this.isWorkableObject(object) && object.length > 0;
+  }
 }
 export { GeneralUtils };

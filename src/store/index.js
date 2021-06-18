@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import { useToast } from "primevue/usetoast";
+import { GeneralUtils } from "../utils/general.utils";
 
 export default createStore({
   state: {
@@ -24,11 +25,23 @@ export default createStore({
       try {
         let response = await fetch("https://swapi.dev/api/starships/");
         response = await response.json();
-        response.results = response.results.map((e, i) => {
-          e["id"] = i + 1;
-          return e;
-        });
-        commit("setStarships", response);
+        if (GeneralUtils.isArrayWithValue(response)) {
+          response.results = response.results.map((e, i) => {
+            e["id"] = i + 1;
+            return e;
+          });
+          commit("setStarships", response);
+        } else if (GeneralUtils.isFieldWithValue(response["detail"])) {
+          console.error(response);
+          toast.add({
+            severity: "error",
+            summary: "Error",
+            detail: response["detail"] || response,
+            life: 6000,
+          });
+        } else {
+          response = {};
+        }
       } catch (error) {
         toast.add({
           severity: "error",
@@ -44,11 +57,23 @@ export default createStore({
       try {
         let response = await fetch("https://swapi.dev/api/planets/");
         response = await response.json();
-        response.results = response.results.map((e, i) => {
-          e["id"] = i + 1;
-          return e;
-        });
-        commit("setPlanets", response);
+        if (GeneralUtils.isArrayWithValue(response)) {
+          response.results = response.results.map((e, i) => {
+            e["id"] = i + 1;
+            return e;
+          });
+          commit("setPlanets", response);
+        } else if (GeneralUtils.isFieldWithValue(response["detail"])) {
+          console.error(response);
+          toast.add({
+            severity: "error",
+            summary: "Error",
+            detail: response["detail"] || response,
+            life: 6000,
+          });
+        } else {
+          response = {};
+        }
       } catch (error) {
         toast.add({
           severity: "error",
@@ -64,10 +89,23 @@ export default createStore({
       try {
         let response = await fetch("https://swapi.dev/api/people/");
         response = await response.json();
-        response.results = response.results.map((e, i) => {
-          e["id"] = i + 1;
-          return e;
-        });
+        if (GeneralUtils.isArrayWithValue(response)) {
+          response.results = response.results.map((e, i) => {
+            e["id"] = i + 1;
+            return e;
+          });
+        } else if (GeneralUtils.isFieldWithValue(response["detail"])) {
+          console.error(response);
+          toast.add({
+            severity: "error",
+            summary: "Error",
+            detail: response["detail"] || response,
+            life: 6000,
+          });
+        } else {
+          response = {};
+        }
+
         commit("setPeople", response);
       } catch (error) {
         toast.add({
